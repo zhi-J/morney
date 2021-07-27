@@ -17,7 +17,6 @@
     props:{
       dataSource:  [String]
     },
-    emits: ['update:dataSource'],
     data(){
       return{
         selectedTags: [] as string[]
@@ -31,6 +30,7 @@
         }else {
           this.selectedTags.push(tag)
         }
+        this.$emit('update:selected', this.selectedTags)
       },
       create(){
         const name = window.prompt('请输入标签名')
@@ -56,7 +56,7 @@
       display: flex;
       flex-wrap: wrap;
       > li{
-        background: #d9d9d9;
+        background: #D3E6F8;
         height: 24px;
         border-radius: 12px;
         display: flex;

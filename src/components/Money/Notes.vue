@@ -1,7 +1,6 @@
 <template>
   <div>
     <label class="notes">
-      {{value}}
       <span class="name">备注</span>
       <input type="text" v-model="value" placeholder="在这里输入噢~">
     </label>
@@ -14,6 +13,11 @@
     data(){
       return{
         value: ''
+      }
+    },
+    watch: {
+      value: function (value: string) {
+        this.$emit("update:value", value)
       }
     }
   });
