@@ -1,17 +1,21 @@
 <template>
   <div>
     <label class="notes">
+      {{value}}
       <span class="name">备注</span>
-      <input type="text" placeholder="在这里输入噢~">
+      <input type="text" v-model="value" placeholder="在这里输入噢~">
     </label>
   </div>
 </template>
 
 <script lang="ts">
   import {defineComponent} from 'vue';
-
   export default defineComponent({
-
+    data(){
+      return{
+        value: ''
+      }
+    }
   });
 </script>
 
