@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-  import Layout from '@/components/Layout';
+  import Layout from '@/components/Layout.vue';
   import Tags from '@/components/Money/Tags.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
   import Types from '@/components/Money/Types.vue';
