@@ -2,36 +2,54 @@
   <div>
     <ul class="types">
       <li :class="type ==='-' && 'selected'" @click="typeSelected('-')">支出</li>
-      <li :class="type ==='+' && 'selected'"  @click="typeSelected('+')">收入</li>
+      <li :class="type ==='+' && 'selected'" @click="typeSelected('+')">收入</li>
     </ul>
   </div>
 </template>
 
-<script lang="js">
-  export default {
-    name: 'Types',
+<script lang="ts">
+  import {defineComponent} from 'vue';
+
+  export default defineComponent({
     data(){
       return{
-        type: '-',
+        type: '-'
       }
     },
     methods: {
-      typeSelected(type){
+      typeSelected(type: string){
         if(type !== '-' && type !== '+'){
           throw new Error('type is unknown')
         }
         this.type = type
       }
     }
-  }
+  });
+  // export default {
+  //   name: 'Types',
+  //   data(){
+  //     return{
+  //       type: '-',
+  //     }
+  //   },
+  //   methods: {
+  //     typeSelected(type){
+  //       if(type !== '-' && type !== '+'){
+  //         throw new Error('type is unknown')
+  //       }
+  //       this.type = type
+  //     }
+  //   }
+  // }
 </script>
 
 <style lang="scss" scoped>
-  .types{
+  .types {
     background: #c4c4c4;
     display: flex;
     align-items: center;
     font-size: 24px;
+
     > li {
       width: 50%;
       height: 64px;
@@ -39,6 +57,7 @@
       justify-content: center;
       align-items: center;
       position: relative;
+
       &.selected::after {
         content: '';
         position: absolute;
