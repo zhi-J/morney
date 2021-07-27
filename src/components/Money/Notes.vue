@@ -8,9 +8,11 @@
 </template>
 
 <script lang="ts">
-  export default {
-    name: 'Notes'
-  }
+  import {defineComponent} from 'vue';
+
+  export default defineComponent({
+
+  });
 </script>
 
 <style lang="scss" scoped>

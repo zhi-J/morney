@@ -13,9 +13,11 @@
 </template>
 
 <script lang="ts">
-  export default {
-    name: 'Tags'
-  }
+  import {defineComponent} from 'vue';
+
+  export default defineComponent({
+
+  });
 </script>
 
 <style lang="scss" scoped>

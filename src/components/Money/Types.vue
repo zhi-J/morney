@@ -25,22 +25,6 @@
       }
     }
   });
-  // export default {
-  //   name: 'Types',
-  //   data(){
-  //     return{
-  //       type: '-',
-  //     }
-  //   },
-  //   methods: {
-  //     typeSelected(type){
-  //       if(type !== '-' && type !== '+'){
-  //         throw new Error('type is unknown')
-  //       }
-  //       this.type = type
-  //     }
-  //   }
-  // }
 </script>
 
 <style lang="scss" scoped>
