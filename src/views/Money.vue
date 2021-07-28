@@ -15,8 +15,9 @@
   import Notes from '@/components/Money/Notes.vue';
 
   import {defineComponent} from 'vue';
-  import model from '@/model';
+  import recordListModel from '@/models/recordListModel';
   import RecordItem from '@/custom';
+  import tagListModel from '@/models/tagListModel';
   // import RecordItem from '@/custom'
   // const version = window.localStorage.getItem('version')
   // const recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]')
@@ -29,13 +30,13 @@
   //   window.localStorage.setItem('recordList', JSON.stringify(recordList))
   // }
   // window.localStorage.setItem('version', '0.0.2')
-
+  const tagList = tagListModel.fetch()
   export default defineComponent({
     data() {
       return {
-        tags: ['衣', '食', '住', '行'],
+        tags: tagList,
         // eslint-disable-next-line no-empty-pattern
-        recordList: model.fetch(),
+        recordList: recordListModel.fetch(),
         record: {
           tags: [''], notes: '', type: '-', amount: 0
         } as RecordItem
@@ -44,7 +45,7 @@
     watch: {
       recordList: {
         handler(recordList) {
-          model.save((recordList));
+          recordListModel.save((recordList));
         },
         deep: true
       },
@@ -58,7 +59,7 @@
         this.record.notes = notes;
       },
       saveRecord() {
-        const record2: RecordItem = model.clone(this.record);
+        const record2: RecordItem = recordListModel.clone(this.record);
         record2.createAt = new Date();
         this.recordList.push(record2);
       },
