@@ -1,15 +1,15 @@
 <template>
   <Layout>
     <div class="navBar">
-      <Icon class="leftIcon" name="left"/>
+      <Icon class="leftIcon" name="left" @click="goBack"/>
       <span class="title">编辑标签</span>
       <span class="rightIcon"></span>
     </div>
     <div class="form-wrapper">
-      <FormItem field-name="标签名" placeholder="请在这里输入新的标签噢~"/>
+      <FormItem :value="tag.name" @update:value="updateTag" field-name="标签名" placeholder="请在这里输入新的标签噢~"/>
     </div>
     <div class="deleteTag-wrapper">
-      <button class="deleteTag">删除标签</button>
+      <button class="deleteTag" @click="remove">删除标签</button>
     </div>
   </Layout>
 </template>
@@ -23,17 +23,40 @@
 
   export default defineComponent({
     components: {Icon, Layout, FormItem},
+    data(){
+      return{
+        tag: {
+          id: '',
+          name: ''
+        }
+      }
+    },
     created(){
       const id = this.$route.params.id
       tagListModel.fetch()
       const tags = tagListModel.data
       const tag = tags.find(tag=> tag.id === id)
       if(tag){
-        console.log(tag);
+        this.tag = tag
       }else {
         this.$router.replace('/404')
       }
     },
+    methods: {
+      updateTag(name: string){
+        if(this.tag){
+          tagListModel.update(this.tag.id, name)
+        }
+      },
+      remove(){
+        if(this.tag){
+          tagListModel.remove(this.tag.id)
+        }
+      },
+      goBack(){
+        this.$router.back()
+      }
+    }
   });
 </script>
 
