@@ -1,6 +1,5 @@
 <template>
   <Layout class-prefix="layout">
-    {{record}}
     <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
     <Types v-model:type="record.type"/>
     <div class="notes">
