@@ -2,7 +2,7 @@
   <div>
     <label class="formItem">
       <span class="name">{{fieldName}}</span>
-      <input type="text" v-model="value" :placeholder="placeholder">
+      <input type="text" :value="value" @input="changeValue($event.target.value)" :placeholder="placeholder">
     </label>
   </div>
 </template>
@@ -19,18 +19,17 @@
       placeholder:{
         type: String,
         default: ''
+      },
+      value:{
+        type: String,
+        default: ''
       }
     },
-    data() {
-      return {
-        value: ''
-      };
-    },
-    watch: {
-      value: function (value: string) {
+    methods:{
+      changeValue(value: string){
         this.$emit('update:value', value);
       }
-    }
+    },
   });
 </script>
 
