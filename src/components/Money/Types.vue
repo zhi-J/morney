@@ -11,15 +11,15 @@
   import {defineComponent} from 'vue';
 
   export default defineComponent({
-    props:{
+    props: {
       type: String
     },
     methods: {
-      typeSelected(type: string){
-        if(type !== '-' && type !== '+'){
-          throw new Error('type is unknown')
+      typeSelected(type: string) {
+        if (type !== '-' && type !== '+') {
+          throw new Error('type is unknown');
         }
-        this.$emit("update:type", type)
+        this.$emit('update:type', type);
       }
     }
   });

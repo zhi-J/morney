@@ -4,7 +4,6 @@
     <Types v-model:type="record.type"/>
     <Notes @update:value="onUpdateNotes"/>
     <Tags v-model:dataSource="tags" @update:selected="onUpdateTags"/>
-    {{recordList}}
   </Layout>
 </template>
 
@@ -15,58 +14,63 @@
   import Types from '@/components/Money/Types.vue';
   import Notes from '@/components/Money/Notes.vue';
 
-  import {defineComponent } from 'vue';
+  import {defineComponent} from 'vue';
+  import model from '@/model';
+  import RecordItem from '@/custom';
+  // import RecordItem from '@/custom'
+  // const version = window.localStorage.getItem('version')
+  // const recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]')
+  // if(version === '0.0.1'){
+  //   //数据迁移
+  //   recordList.forEach((record: { createAt: Date; }) => {
+  //     record.createAt = new Date(2020, 0, 1)
+  //   });
+  //   //保存数据
+  //   window.localStorage.setItem('recordList', JSON.stringify(recordList))
+  // }
+  // window.localStorage.setItem('version', '0.0.2')
 
-  window.localStorage.setItem('version', '0.0.1')
-
-  type Record = {
-    tags: string[]
-    notes: string
-    type: string
-    amount: number
-    createAt?: Date
-  }
   export default defineComponent({
-    data(){
-      return{
-        tags: ['衣','食','住','行'],
+    data() {
+      return {
+        tags: ['衣', '食', '住', '行'],
         // eslint-disable-next-line no-empty-pattern
-        recordList: [] =JSON.parse(window.localStorage.getItem('recordList') || '[]'),
+        recordList: model.fetch(),
         record: {
-          tags: [''],  notes: '', type: '-', amount: 0
-        } as Record
-      }
+          tags: [''], notes: '', type: '-', amount: 0
+        } as RecordItem
+      };
     },
-    watch:{
+    watch: {
       recordList: {
         handler(recordList) {
-          window.localStorage.setItem('recordList', JSON.stringify(recordList))
+          model.save((recordList));
         },
         deep: true
       },
     },
     components: {Notes, Types, NumberPad, Tags, Layout},
-    methods:{
-      onUpdateTags(selectedTags: string[]){
-        this.record.tags = selectedTags
+    methods: {
+      onUpdateTags(selectedTags: string[]) {
+        this.record.tags = selectedTags;
       },
-      onUpdateNotes(notes: string){
-        this.record.notes = notes
+      onUpdateNotes(notes: string) {
+        this.record.notes = notes;
       },
-      saveRecord(){
-        const record2: Record = JSON.parse(JSON.stringify(this.record))
-        record2.createAt = new Date()
-        this.recordList.push(record2)
+      saveRecord() {
+        const record2: RecordItem = model.clone(this.record);
+        record2.createAt = new Date();
+        this.recordList.push(record2);
       },
-      onUpdateAmount(value: string){
-        this.record.amount = parseFloat(value)
+      onUpdateAmount(value: string) {
+        this.record.amount = parseFloat(value);
       }
     }
-  })
+  });
 
 </script>
 <style lang="scss">
-  .layout-content{
+  .layout-content {
     display: flex;
     flex-direction: column-reverse;
   }

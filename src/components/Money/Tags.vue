@@ -5,40 +5,42 @@
     </div>
     <ul class="current">
       <li v-for="tag in dataSource" :key="tag"
-      @click="toggle(tag)"
-      :class="{selected: selectedTags.indexOf(tag) >= 0}">{{tag}}</li>
+          @click="toggle(tag)"
+          :class="{selected: selectedTags.indexOf(tag) >= 0}">{{tag}}
+      </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-  import {defineComponent } from 'vue';
+  import {defineComponent} from 'vue';
+
   export default defineComponent({
-    props:{
-      dataSource:  [String]
+    props: {
+      dataSource: [String]
     },
-    data(){
-      return{
+    data() {
+      return {
         selectedTags: [] as string[]
-      }
+      };
     },
-    methods:{
-      toggle(tag: string){
-        const index = this.selectedTags.indexOf(tag)
-        if(index >= 0){
-          this.selectedTags.splice(index, 1)
-        }else {
-          this.selectedTags.push(tag)
+    methods: {
+      toggle(tag: string) {
+        const index = this.selectedTags.indexOf(tag);
+        if (index >= 0) {
+          this.selectedTags.splice(index, 1);
+        } else {
+          this.selectedTags.push(tag);
         }
-        this.$emit('update:selected', this.selectedTags)
+        this.$emit('update:selected', this.selectedTags);
       },
-      create(){
-        const name = window.prompt('请输入标签名')
-        if(name === ''){
-          window.alert('标签名不能为空')
-        }else {
-          if(this.dataSource){
-            this.$emit('update:dataSource',[...this.dataSource, name])
+      create() {
+        const name = window.prompt('请输入标签名');
+        if (name === '') {
+          window.alert('标签名不能为空');
+        } else {
+          if (this.dataSource) {
+            this.$emit('update:dataSource', [...this.dataSource, name]);
           }
         }
       }
@@ -47,15 +49,17 @@
 </script>
 
 <style lang="scss" scoped>
-  .tags{
+  .tags {
     padding: 16px;
     font-size: 14px;
     display: flex;
     flex-direction: column-reverse;
-    > .current{
+
+    > .current {
       display: flex;
       flex-wrap: wrap;
-      > li{
+
+      > li {
         background: #D3E6F8;
         height: 24px;
         border-radius: 12px;
@@ -65,15 +69,18 @@
         padding: 0 16px;
         margin-right: 12px;
         margin-top: 4px;
-        &.selected{
+
+        &.selected {
           background: #F0C48A;
           color: white;
         }
       }
     }
-    > .new{
+
+    > .new {
       padding-top: 16px;
-      button{
+
+      button {
         background: transparent;
         border: none;
         color: #999;

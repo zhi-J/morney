@@ -9,31 +9,34 @@
 
 <script lang="ts">
   import {defineComponent} from 'vue';
+
   export default defineComponent({
-    data(){
-      return{
+    data() {
+      return {
         value: ''
-      }
+      };
     },
     watch: {
       value: function (value: string) {
-        this.$emit("update:value", value)
+        this.$emit('update:value', value);
       }
     }
   });
 </script>
 
 <style lang="scss" scoped>
-  .notes{
+  .notes {
     font-size: 14px;
     padding-left: 16px;
     display: flex;
     align-items: center;
     background: #f5f5f5;
-    > .name{
-      padding-right:16px;
+
+    > .name {
+      padding-right: 16px;
     }
-    input{
+
+    input {
       height: 64px;
       background: transparent;
       border: none;
