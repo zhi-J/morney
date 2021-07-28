@@ -1,8 +1,8 @@
 <template>
   <div>
     <label class="notes">
-      <span class="name">备注</span>
-      <input type="text" v-model="value" placeholder="在这里输入噢~">
+      <span class="name">{{fieldName}}</span>
+      <input type="text" v-model="value" :placeholder="placeholder">
     </label>
   </div>
 </template>
@@ -11,6 +11,16 @@
   import {defineComponent} from 'vue';
 
   export default defineComponent({
+    props:{
+      fieldName: {
+        type: String,
+        required: true
+      },
+      placeholder:{
+        type: String,
+        default: ''
+      }
+    },
     data() {
       return {
         value: ''
