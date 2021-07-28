@@ -2,7 +2,9 @@
   <Layout class-prefix="layout">
     <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
     <Types v-model:type="record.type"/>
-    <Notes @update:value="onUpdateNotes" field-name="备注" placeholder="请在这里输入备注噢~ "/>
+    <div class="notes">
+      <FormItem @update:value="onUpdateNotes" field-name="备注" placeholder="请在这里输入备注噢~ "/>
+    </div>
     <Tags v-model:dataSource="tags" @update:selected="onUpdateTags"/>
   </Layout>
 </template>
@@ -12,7 +14,7 @@
   import Tags from '@/components/Money/Tags.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
   import Types from '@/components/Money/Types.vue';
-  import Notes from '@/components/Money/Notes.vue';
+  import FormItem from '@/components/Money/FormItem.vue';
 
   import {defineComponent} from 'vue';
   import recordListModel from '@/models/recordListModel';
@@ -50,7 +52,7 @@
         deep: true
       },
     },
-    components: {Notes, Types, NumberPad, Tags, Layout},
+    components: {FormItem, Types, NumberPad, Tags, Layout},
     methods: {
       onUpdateTags(selectedTags: string[]) {
         this.record.tags = selectedTags;
@@ -74,5 +76,8 @@
   .layout-content {
     display: flex;
     flex-direction: column-reverse;
+  }
+  .notes{
+    padding: 12px 0;
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label class="notes">
+    <label class="formItem">
       <span class="name">{{fieldName}}</span>
       <input type="text" v-model="value" :placeholder="placeholder">
     </label>
@@ -35,19 +35,18 @@
 </script>
 
 <style lang="scss" scoped>
-  .notes {
+  .formItem {
     font-size: 14px;
     padding-left: 16px;
     display: flex;
     align-items: center;
-    background: #f5f5f5;
 
     > .name {
       padding-right: 16px;
     }
 
     input {
-      height: 64px;
+      height: 44px;
       background: transparent;
       border: none;
       flex-grow: 1;

@@ -54,7 +54,8 @@
     font-size: 14px;
     display: flex;
     flex-direction: column-reverse;
-
+    background: white;
+    flex-grow: 1;
     > .current {
       display: flex;
       flex-wrap: wrap;
