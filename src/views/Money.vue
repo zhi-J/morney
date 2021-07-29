@@ -17,7 +17,6 @@
   import FormItem from '@/components/Money/FormItem.vue';
 
   import {defineComponent} from 'vue';
-  import recordListModel from '@/models/recordListModel';
   import store from '@/store/index2';
 
 
@@ -48,7 +47,7 @@
     watch: {
       recordList: {
         handler() {
-          recordListModel.save();
+          store.saveRecords();
         },
         deep: true
       },
