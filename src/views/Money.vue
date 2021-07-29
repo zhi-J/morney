@@ -5,7 +5,7 @@
     <div class="notes">
       <FormItem @update:value="onUpdateNotes" field-name="备注" placeholder="请在这里输入备注噢~ "/>
     </div>
-    <Tags v-model:dataSource="tags" @update:selected="onUpdateTags"/>
+    <Tags />
   </Layout>
 </template>
 
@@ -35,14 +35,16 @@
   export default defineComponent({
     data() {
       return {
-        tags: store.tagList,
-        // eslint-disable-next-line no-empty-pattern
-        recordList: store.recordList,
         record: {
           tags: [''], notes: '', type: '-', amount: 0
           // eslint-disable-next-line no-undef
         } as RecordItem
       };
+    },
+    computed:{
+      recordList(){
+        return store.recordList
+      }
     },
     watch: {
       recordList: {
@@ -54,9 +56,6 @@
     },
     components: {FormItem, Types, NumberPad, Tags, Layout},
     methods: {
-      onUpdateTags(selectedTags: string[]) {
-        this.record.tags = selectedTags;
-      },
       onUpdateNotes(notes: string) {
         this.record.notes = notes;
       },
