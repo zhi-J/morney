@@ -46,8 +46,8 @@
     },
     watch: {
       recordList: {
-        handler(recordList) {
-          recordListModel.save((recordList));
+        handler() {
+          recordListModel.save();
         },
         deep: true
       },
@@ -61,9 +61,7 @@
         this.record.notes = notes;
       },
       saveRecord() {
-        const record2: RecordItem = recordListModel.clone(this.record);
-        record2.createAt = new Date();
-        this.recordList.push(record2);
+        recordListModel.create(this.record)
       },
       onUpdateAmount(value: string) {
         this.record.amount = parseFloat(value);
