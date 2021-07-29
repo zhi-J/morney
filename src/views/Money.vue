@@ -18,9 +18,8 @@
 
   import {defineComponent} from 'vue';
   import recordListModel from '@/models/recordListModel';
-  import RecordItem from '@/custom';
-  import tagListModel from '@/models/tagListModel';
-  // import RecordItem from '@/custom'
+
+
   // const version = window.localStorage.getItem('version')
   // const recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]')
   // if(version === '0.0.1'){
@@ -32,15 +31,16 @@
   //   window.localStorage.setItem('recordList', JSON.stringify(recordList))
   // }
   // window.localStorage.setItem('version', '0.0.2')
-  const tagList = tagListModel.fetch()
+  // const tagList = tagListModel.fetch()
   export default defineComponent({
     data() {
       return {
-        tags: tagList,
+        tags: window.tagList,
         // eslint-disable-next-line no-empty-pattern
         recordList: recordListModel.fetch(),
         record: {
           tags: [''], notes: '', type: '-', amount: 0
+          // eslint-disable-next-line no-undef
         } as RecordItem
       };
     },

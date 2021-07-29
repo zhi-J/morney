@@ -17,11 +17,11 @@
   import {defineComponent} from 'vue';
   import tagListModel from '@/models/tagListModel';
 
-  tagListModel.fetch()
+  // tagListModel.fetch()
   export default defineComponent({
     data(){
       return{
-        tags: tagListModel.data
+        tags: window.tagList
       }
     },
     components: {Layout},
