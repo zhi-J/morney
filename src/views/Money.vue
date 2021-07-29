@@ -37,7 +37,7 @@
       return {
         tags: window.tagList,
         // eslint-disable-next-line no-empty-pattern
-        recordList: recordListModel.fetch(),
+        recordList: window.recordList,
         record: {
           tags: [''], notes: '', type: '-', amount: 0
           // eslint-disable-next-line no-undef
@@ -61,7 +61,7 @@
         this.record.notes = notes;
       },
       saveRecord() {
-        recordListModel.create(this.record)
+        window.createRecord(this.record)
       },
       onUpdateAmount(value: string) {
         this.record.amount = parseFloat(value);
