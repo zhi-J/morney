@@ -18,6 +18,7 @@
 
   import {defineComponent} from 'vue';
   import recordListModel from '@/models/recordListModel';
+  import store from '@/store/index2';
 
 
   // const version = window.localStorage.getItem('version')
@@ -35,9 +36,9 @@
   export default defineComponent({
     data() {
       return {
-        tags: window.tagList,
+        tags: store.tagList,
         // eslint-disable-next-line no-empty-pattern
-        recordList: window.recordList,
+        recordList: store.recordList,
         record: {
           tags: [''], notes: '', type: '-', amount: 0
           // eslint-disable-next-line no-undef
@@ -61,7 +62,7 @@
         this.record.notes = notes;
       },
       saveRecord() {
-        window.createRecord(this.record)
+        store.createRecord(this.record)
       },
       onUpdateAmount(value: string) {
         this.record.amount = parseFloat(value);

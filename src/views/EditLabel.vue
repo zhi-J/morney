@@ -19,6 +19,8 @@
   import Layout from '@/components/Layout.vue';
   import Icon from '@/components/Icon.vue';
   import FormItem from '@/components/Money/FormItem.vue';
+  import store from '@/store/index2';
+
 
   export default defineComponent({
     components: {Icon, Layout, FormItem},
@@ -32,7 +34,7 @@
     },
     created(){
       const id = this.$route.params.id
-      const tags = window.tagList
+      const tags = store.tagList
       const tag = tags.find(tag=> tag.id === id)
       if(tag){
         this.tag = tag
@@ -43,12 +45,12 @@
     methods: {
       updateTag(name: string){
         if(this.tag){
-          window.updateTag(this.tag.id, name)
+          store.updateTag(this.tag.id, name)
         }
       },
       remove(){
         if(this.tag){
-          if(window.removeTag(this.tag.id)){
+          if(store.removeTag(this.tag.id)){
             this.$router.back()
           }else {
             window.alert('删除失败')

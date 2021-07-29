@@ -15,12 +15,14 @@
 <script>
   import Layout from '@/components/Layout';
   import {defineComponent} from 'vue';
+  import store from '@/store/index2';
+
 
   // tagListModel.fetch()
   export default defineComponent({
     data(){
       return{
-        tags: window.tagList
+        tags: store.tagList
       }
     },
     components: {Layout},
@@ -28,7 +30,7 @@
       createTag(){
         const name = window.prompt('请输入标签名')
         if(name){
-          window.createTag(name)
+          store.createTag(name)
         }
       }
     }
