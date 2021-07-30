@@ -17,8 +17,8 @@
   import FormItem from '@/components/Money/FormItem.vue';
 
   import {defineComponent} from 'vue';
-  import store from '@/store/index2';
-
+  // import store2 from '@/store/index2';
+  import store from '@/store/index.ts';
 
   // const version = window.localStorage.getItem('version')
   // const recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]')
@@ -41,15 +41,18 @@
         } as RecordItem
       };
     },
+    created(){
+      store.commit('fetchRecords')
+    },
     computed:{
       recordList(){
-        return store.recordList
+        return store.state.recordList
       }
     },
     watch: {
       recordList: {
         handler() {
-          store.saveRecords();
+          store.commit('saveRecords');
         },
         deep: true
       },
@@ -60,7 +63,7 @@
         this.record.notes = notes;
       },
       saveRecord() {
-        store.createRecord(this.record)
+        store.commit('createRecord',this.record)
       },
       onUpdateAmount(value: string) {
         this.record.amount = parseFloat(value);

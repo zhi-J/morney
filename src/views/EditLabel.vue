@@ -19,42 +19,42 @@
   import Layout from '@/components/Layout.vue';
   import Icon from '@/components/Icon.vue';
   import FormItem from '@/components/Money/FormItem.vue';
-  import store from '@/store/index2';
+  // import store from '@/store/index2';
+  import store from '@/store/index.ts';
 
 
   export default defineComponent({
     components: {Icon, Layout, FormItem},
-    data(){
-      return{
-        tag: {
-          id: '',
-          name: ''
-        }
+    // data(){
+    //   return{
+    //     tag: {
+    //       id: '',
+    //       name: ''
+    //     }
+    //   }
+    // },
+    computed:{
+      tag(){
+        return store.state.currentTag
       }
     },
     created(){
       const id = this.$route.params.id
-      const tags = store.tagList
-      const tag = tags.find(tag=> tag.id === id)
-      if(tag){
-        this.tag = tag
-      }else {
+      store.commit('fetchTgs')
+      store.commit('setCurrentTag', id)
+      if(!this.tag){
         this.$router.replace('/404')
       }
     },
     methods: {
       updateTag(name: string){
         if(this.tag){
-          store.updateTag(this.tag.id, name)
+          store.commit('updateTag',{id:this.tag.id, name})
         }
       },
       remove(){
         if(this.tag){
-          if(store.removeTag(this.tag.id)){
-            this.$router.back()
-          }else {
-            window.alert('删除失败')
-          }
+          store.commit('removeTag',this.tag.id)
         }
       },
       goBack(){

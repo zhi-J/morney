@@ -14,14 +14,22 @@
 
 <script lang="ts">
   import {defineComponent} from 'vue';
-  import store from '@/store/index2';
+  // import store from '@/store/index2';
+  import store from '@/store/index.ts';
 
   export default defineComponent({
     data() {
       return {
         selectedTags: [] as string[],
-        tagList: store.fetchTags()
       };
+    },
+    computed:{
+      tagList(){
+        return store.state.tagList
+      }
+    },
+    created(){
+      store.commit('fetchTags')
     },
     methods: {
       toggle(tag: string) {
@@ -38,7 +46,7 @@
         if (!name ) {
           return window.alert('标签名不能为空');
         }
-        store.createTag(name)
+        store.commit('createTag',name)
 
       }
     }

@@ -15,23 +15,32 @@
 <script>
   import Layout from '@/components/Layout';
   import {defineComponent} from 'vue';
-  import store from '@/store/index2';
+  // import store from '@/store/index2';
+  import store from '@/store/index.ts';
 
 
-  // tagListModel.fetch()
   export default defineComponent({
-    data(){
-      return{
-        tags: store.tagList
+    // data(){
+    //   return{
+    //     tags: store.state.tagList
+    //   }
+    // },
+    computed:{
+      tags(){
+        return store.state.tagList
       }
+    },
+    beforeCreate(){
+      store.commit('fetchTags')
     },
     components: {Layout},
     methods: {
       createTag(){
-        const name = window.prompt('请输入标签名')
-        if(name){
-          store.createTag(name)
+        const name = window.prompt('请输入标签名');
+        if (!name ) {
+          return window.alert('标签名不能为空');
         }
+        store.commit('createTag',name)
       }
     }
   })
