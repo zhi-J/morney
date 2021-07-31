@@ -1,33 +1,31 @@
 <template>
-  <div>
-    <ul class="types">
-      <li :class="{selected: type==='-', [classPrefix+'-item']: classPrefix}" @click="typeSelected('-')">支出</li>
-      <li :class="{selected: type==='+', [classPrefix+'-item']: classPrefix}" @click="typeSelected('+')">收入</li>
-    </ul>
-  </div>
+  <ul class="tabs">
+    <li v-for="item in dataSource" :key="item.value"
+        :class="{selected: item.value === type, [classPrefix+'-tabs-item']: classPrefix}"
+        @click="select(item)">{{item.text}}</li>
+  </ul>
 </template>
 
 <script lang="ts">
   import {defineComponent} from 'vue';
 
+  type DataSourceItem = { text: string, value: string }
   export default defineComponent({
     props: {
       type: String,
-      classPrefix: String
+      classPrefix: String,
+      dataSource: []
     },
-    methods: {
-      typeSelected(type: string) {
-        if (type !== '-' && type !== '+') {
-          throw new Error('type is unknown');
-        }
-        this.$emit('update:type', type);
+    methods:{
+      select(item:DataSourceItem){
+        this.$emit('update:type', item.value);
       }
     }
   });
 </script>
 
 <style lang="scss" scoped>
-  .types {
+  .tabs {
     background: #c4c4c4;
     display: flex;
     align-items: center;

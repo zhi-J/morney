@@ -19,7 +19,6 @@
   import Layout from '@/components/Layout.vue';
   import Icon from '@/components/Icon.vue';
   import FormItem from '@/components/Money/FormItem.vue';
-  // import store from '@/store/index2';
   import store from '@/store/index.ts';
 
 

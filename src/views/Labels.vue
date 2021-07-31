@@ -15,7 +15,6 @@
 <script>
   import Layout from '@/components/Layout';
   import {defineComponent} from 'vue';
-  // import store from '@/store/index2';
   import store from '@/store/index.ts';
 
 

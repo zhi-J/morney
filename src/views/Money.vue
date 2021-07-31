@@ -17,7 +17,6 @@
   import FormItem from '@/components/Money/FormItem.vue';
 
   import {defineComponent} from 'vue';
-  // import store2 from '@/store/index2';
   import store from '@/store/index.ts';
 
   // const version = window.localStorage.getItem('version')

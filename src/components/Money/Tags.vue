@@ -14,7 +14,6 @@
 
 <script lang="ts">
   import {defineComponent} from 'vue';
-  // import store from '@/store/index2';
   import store from '@/store/index.ts';
 
   export default defineComponent({

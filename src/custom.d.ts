@@ -12,11 +12,12 @@ declare global {
   }
   type TagListModel = {
     data: Tag[]
-    fetch: ()=>Tag[]
-    create: (name:string) => string
+    fetch: () => Tag[]
+    create: (name: string) => string
     update: (id: string, name: string) => string
-    save: ()=>void
-    remove: (id: string)=> boolean
+    save: () => void
+    remove: (id: string) => boolean
   }
+
 }
 export {};
