@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <Tabs class-prefix="type" :data-source="typeList" v-model:type="type"/>
+    <Tabs class-prefix="type" :data-source="recordTypeList" v-model:type="type"/>
     <Tabs class-prefix="interval" :data-source="intervalList" v-model:type="interval"/>
   </Layout>
 </template>
@@ -9,20 +9,16 @@
   import Layout from '@/components/Layout';
   import Tabs from '@/components/Tabs';
   import {defineComponent} from 'vue';
+  import intervalList from '@/constants/intervalList';
+  import recordTypeList from '@/constants/recordTypeList';
   export default defineComponent( {
     components: {Layout,Tabs},
     data(){
       return{
         type: '-',
         interval: 'day',
-        intervalList:[
-          {text:'按天', value: 'day'},
-          {text:'按周', value: 'week'},
-          {text:'按月', value: 'month'}],
-        typeList:[
-          {text:'支出', value: '-'},
-          {text:'收入', value: '+'}
-        ]
+        intervalList:intervalList,
+        recordTypeList: recordTypeList
       }
     }
   })

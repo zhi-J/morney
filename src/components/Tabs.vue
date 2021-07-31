@@ -14,7 +14,7 @@
     props: {
       type: String,
       classPrefix: String,
-      dataSource: []
+      dataSource: Array
     },
     methods:{
       select(item:DataSourceItem){
