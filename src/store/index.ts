@@ -3,11 +3,7 @@ import clone from '@/lib/clone';
 import createId from '@/lib/createId';
 import router from '@/router';
 
-type RootState = {
-  recordList: RecordItem[],
-  tagList: Tag[]
-  currentTag?: Tag
-}
+
 const store =  createStore({
   state: {
     recordList: [] ,
@@ -23,7 +19,7 @@ const store =  createStore({
     },
     createRecord(state, record){
       const record2: RecordItem = clone(record);
-      record2.createAt = new Date();
+      record2.createAt = new Date().toISOString();
       state.recordList?.push(record2);   //可选链，新语法
       store.commit('saveRecords')
     },

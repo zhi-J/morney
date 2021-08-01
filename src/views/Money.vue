@@ -5,7 +5,7 @@
     <div class="notes">
       <FormItem @update:value="onUpdateNotes" field-name="备注" placeholder="请在这里输入备注噢~ "/>
     </div>
-    <Tags />
+    <Tags @update:selected="onUpdateTags"/>
   </Layout>
 </template>
 
@@ -36,7 +36,7 @@
     data() {
       return {
         record: {
-          tags: [''], notes: '', type: '-', amount: 0
+          tags : [] as string[] , notes: '', type: '-', amount: 0
           // eslint-disable-next-line no-undef
         } as RecordItem,
         recordTypeList: recordTypeList
@@ -68,6 +68,9 @@
       },
       onUpdateAmount(value: string) {
         this.record.amount = parseFloat(value);
+      },
+      onUpdateTags(value:string[]){
+        this.record.tags = value
       }
     }
   });

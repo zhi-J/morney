@@ -4,7 +4,7 @@ declare global {
     notes: string
     type: string
     amount: number
-    createAt?: Date
+    createAt?: string
   }
   type Tag = {
     id: string
@@ -18,6 +18,10 @@ declare global {
     save: () => void
     remove: (id: string) => boolean
   }
-
+  type RootState = {
+    recordList: RecordItem[],
+    tagList: Tag[]
+    currentTag?: Tag
+  }
 }
 export {};
