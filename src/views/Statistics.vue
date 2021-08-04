@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <Tabs class-prefix="type" :data-source="recordTypeList" v-model:type="type"/>
-    <ol>
+    <ol v-if="groupedList.length > 0">
       <li v-for="(group, index) in groupedList" :key="index">
         <h3 class="title">{{beautify(group.title)}} <span>{{group.total}}</span></h3>
         <ol>
@@ -9,7 +9,9 @@
         </ol>
       </li>
     </ol>
-
+    <div v-else class="noResult">
+      目前没有相关记录
+    </div>
   </Layout>
 </template>
 
@@ -20,7 +22,7 @@
   import recordTypeList from '@/constants/recordTypeList';
   import store from '@/store';
   import clone from '@/lib/clone';
-  var dayjs = require('dayjs')
+  const dayjs = require('dayjs')
   export default defineComponent({
     components: {Layout, Tabs},
     data() {
@@ -31,7 +33,7 @@
     },
     methods:{
       tagString(tags){
-        return tags.length===0 ? "无" : tags.join(',')
+        return tags.length===0 ? "无" : tags.join('，')
       },
       beautify(string){
         const now = dayjs()
@@ -54,10 +56,11 @@
       },
       groupedList() {
         const {recordList} = this
-        if(recordList.length === 0){
+
+        const newList = clone(recordList).filter(r => r.type === this.type).sort((a,b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf())
+        if(newList.length === 0){
           return []
         }
-        const newList = clone(recordList).filter(r => r.type === this.type).sort((a,b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf())
         const result = [{title: dayjs(newList[0].createAt).format('YYYY-MM-DD'), total: 0,  items: [newList[0]]}]
         for(let i=1; i<newList.length; i++){
           const current = newList[i]
@@ -80,6 +83,10 @@
   })
 </script>
 <style lang="scss" scoped>
+  .noResult{
+    padding: 16px;
+    text-align: center;
+  }
   ::v-deep {
     .type-tabs-item {
       background: #c4c4c4;

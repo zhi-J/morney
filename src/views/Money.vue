@@ -3,7 +3,7 @@
     <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
     <Tabs v-model:type="record.type" :data-source="recordTypeList"/>
     <div class="notes">
-      <FormItem @update:value="onUpdateNotes" field-name="备注" placeholder="请在这里输入备注噢~ "/>
+      <FormItem v-model:value="record.notes" field-name="备注" placeholder="请在这里输入备注噢~ "/>
     </div>
     <Tags @update:selected="onUpdateTags"/>
   </Layout>
@@ -60,11 +60,12 @@
     },
     components: {FormItem, NumberPad, Tags, Layout, Tabs},
     methods: {
-      onUpdateNotes(notes: string) {
-        this.record.notes = notes;
-      },
       saveRecord() {
+        if(!this.record.tags || this.record.tags.length === 0){
+          return  window.alert('请至少选择一个标签')
+        }
         store.commit('createRecord',this.record)
+        this.record.notes = ''
       },
       onUpdateAmount(value: string) {
         this.record.amount = parseFloat(value);

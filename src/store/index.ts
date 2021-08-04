@@ -17,11 +17,12 @@ const store =  createStore({
     fetchRecords(state){
       state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]')
     },
-    createRecord(state, record){
-      const record2: RecordItem = clone(record);
+    createRecord(state, record:RecordItem){
+      const record2 = clone(record);
       record2.createAt = new Date().toISOString();
       state.recordList?.push(record2);   //可选链，新语法
       store.commit('saveRecords')
+      window.alert('已保存')
     },
     saveRecords(state){
       window.localStorage.setItem('recordList', JSON.stringify(state.recordList));
